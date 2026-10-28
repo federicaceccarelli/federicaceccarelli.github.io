@@ -590,6 +590,70 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
   letter-spacing: -0.01em;
 }
 
+/* ---------- Skills & certifications ---------- */
+
+.certs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+}
+.cert {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.5rem 1.4rem 1.35rem;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.cert-issuer {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+.cert-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.cert-desc { color: var(--ink-soft); font-size: 0.9375rem; line-height: 1.5; }
+.cert-date,
+.cert-status { margin-top: auto; padding-top: 0.75rem; font-size: 0.875rem; font-weight: 600; }
+.cert-date { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.cert-status { display: flex; align-items: center; gap: 0.5rem; color: var(--lime-deep); }
+.cert-status::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: inset 0 0 0 1.5px var(--lime-deep);
+}
+
+.it-skills { margin-top: clamp(3.5rem, 7vw, 5rem); }
+.tool-groups { display: grid; }
+.tool-groups > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 0.75rem 2rem;
+  align-items: center;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tool-groups dt { font-weight: 700; }
+.tool-level {
+  margin-left: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
 /* ---------- Beyond ---------- */
 
 .ledger { border-top: 2px solid var(--ink); }
@@ -604,13 +668,26 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
 }
 .ledger-row:hover { background: var(--paper-2); padding-inline: 0.75rem; }
 .ledger-role { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.015em; line-height: 1.2; }
+.ledger-tag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: 0.2em;
+}
 .ledger-org { font-weight: 500; }
 .ledger-place, .ledger-date { color: var(--ink-soft); font-size: 0.9375rem; }
 .ledger-date { text-align: right; font-variant-numeric: tabular-nums; }
 
 .toolkit {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(2rem, 4vw, 4rem);
   margin-top: clamp(4rem, 8vw, 6rem);
 }
@@ -840,6 +917,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
   .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
   .ledger-row { grid-template-columns: minmax(0, 1fr); }
   .ledger-date { grid-column: 1; grid-row: auto; text-align: left; }
+  .tool-groups > div { grid-template-columns: minmax(0, 1fr); }
   .lang-list li { grid-template-columns: 1fr auto; }
   .lang-level { grid-column: 1; grid-row: 2; margin-top: -0.6rem; }
   .meter { grid-column: 2; grid-row: 1; }
