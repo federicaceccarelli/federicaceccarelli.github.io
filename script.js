@@ -119,6 +119,31 @@
     lineObserver.observe(stepEls[0].querySelector("[data-node]"));
   }
 
+  // Logo strip: colour rises as a logo nears the middle and fades as it leaves,
+  // overlapping with the next one (smoothstep over a ~one-logo radius)
+  const marquee = document.querySelector(".logo-marquee");
+  if (marquee && !reduceMotion) {
+    const logos = [...marquee.querySelectorAll("li")];
+    const lit = new Map();
+    let frame = 0;
+    const light = () => {
+      const box = marquee.getBoundingClientRect();
+      const mid = box.left + box.width / 2;
+      const radius = Math.min(240, box.width / 3);
+      logos.forEach((li) => {
+        const r = li.getBoundingClientRect();
+        const t = Math.max(0, 1 - Math.abs(r.left + r.width / 2 - mid) / radius);
+        const v = Math.round(t * t * (3 - 2 * t) * 100) / 100;
+        if (lit.get(li) !== v) { lit.set(li, v); li.style.setProperty("--lit", v); }
+      });
+      frame = requestAnimationFrame(light);
+    };
+    new IntersectionObserver(([entry]) => {
+      cancelAnimationFrame(frame);
+      if (entry.isIntersecting) frame = requestAnimationFrame(light);
+    }).observe(marquee);
+  }
+
   let ticking = false;
   window.addEventListener("scroll", () => {
     if (ticking) return;
